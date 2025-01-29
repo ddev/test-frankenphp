@@ -1,0 +1,20 @@
+type: drupal11
+docroot: web
+webserver_type: generic
+php_version: 8.4
+
+database:
+    type: mariadb
+    version: "10.11"
+
+corepack_enable: true
+
+web_extra_daemons:
+    - name: "frankenphp"
+      command: "frankenphp php-server --listen 0.0.0.0:80 --root ${DDEV_DOCROOT} -v -a"
+      directory: /var/www/html
+web_extra_exposed_ports:
+    - name: "frankenphp"
+      container_port: 80
+      http_port: 80
+      https_port: 443
